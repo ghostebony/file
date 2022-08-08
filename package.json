@@ -1,0 +1,32 @@
+{
+	"name": "@ghostebony/file",
+	"version": "0.0.1",
+	"main": "index.js",
+	"author": "Pedro Américo",
+	"license": "MIT",
+	"repository": "github:ghostebony/file",
+	"scripts": {
+		"preinstall": "npx only-allow pnpm",
+		"build": "tsc --build",
+		"clean": "tsc --build --clean",
+		"build:watch": "tsc --build --watch",
+		"build:clean": "pnpm run clean && pnpm run build"
+	},
+	"dependencies": {
+		"archiver": "^5.3.1"
+	},
+	"devDependencies": {
+		"@types/archiver": "^5.3.1",
+		"@types/node": "^18.6.5",
+		"prettier": "^2.7.1",
+		"typescript": "^4.7.4"
+	},
+	"keywords": [
+		"file",
+		"directory",
+		"download",
+		"gzip",
+		"gunzip"
+	],
+	"type": "module"
+}
