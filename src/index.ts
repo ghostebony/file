@@ -1,6 +1,18 @@
 import { existsSync } from "fs";
 import { access, mkdir, readdir, rm, unlink, writeFile } from "fs/promises";
 
+export const downloadFile = async (url: string, folderPath: string) => {
+	const fileName = url.split(sep).pop() || "unknown.file";
+
+	const filePath = await createFile(
+		folderPath,
+		fileName,
+		(await (await fetch(url)).blob()).stream()
+	);
+
+	return { fileName, filePath };
+};
+
 export const createFolder = async (path: string, recursive: boolean = false) => {
 	if (!existsSync(path)) await mkdir(path, { recursive });
 };
