@@ -1,8 +1,18 @@
 import { existsSync } from "fs";
-import { access, mkdir, readdir, rm, unlink } from "fs/promises";
+import { access, mkdir, readdir, rm, unlink, writeFile } from "fs/promises";
 
 export const createFolder = async (path: string, recursive: boolean = false) => {
 	if (!existsSync(path)) await mkdir(path, { recursive });
+};
+
+export const createFile = async (path: string, fileName: string, data: string | Stream) => {
+	const filePath = path + sep + fileName;
+
+	await createFolder(path);
+
+	await writeFile(filePath, data);
+
+	return filePath;
 };
 
 export const fileExists = async (filePath: string) => {
