@@ -1,6 +1,6 @@
 {
 	"name": "@ghostebony/file",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "index.js",
 	"author": "Pedro Américo",
 	"license": "MIT",
