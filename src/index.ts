@@ -1,8 +1,8 @@
-import { createWriteStream, existsSync } from "fs";
+import { createReadStream, createWriteStream, existsSync } from "fs";
 import { access, mkdir, readdir, rm, unlink, writeFile } from "fs/promises";
 import { sep } from "path";
 import type { Stream } from "stream";
-import { createGzip } from "zlib";
+import { createGunzip, createGzip } from "zlib";
 
 export const downloadFile = async (url: string, folderPath: string) => {
 	const fileName = url.split(sep).pop() || "unknown.file";
@@ -58,3 +58,8 @@ export const gzipFile = (filePath: string) =>
 	createReadStream(filePath)
 		.pipe(createGzip())
 		.pipe(createWriteStream(filePath + ".gz"));
+
+export const gunzipFile = (filePath: string) =>
+	createReadStream(filePath)
+		.pipe(createGunzip())
+		.pipe(createWriteStream(filePath.split(".").slice(0, -1).join(".")));
