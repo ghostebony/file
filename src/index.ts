@@ -1,7 +1,8 @@
-import { existsSync } from "fs";
+import { createWriteStream, existsSync } from "fs";
 import { access, mkdir, readdir, rm, unlink, writeFile } from "fs/promises";
 import { sep } from "path";
 import type { Stream } from "stream";
+import { createGzip } from "zlib";
 
 export const downloadFile = async (url: string, folderPath: string) => {
 	const fileName = url.split(sep).pop() || "unknown.file";
@@ -52,3 +53,8 @@ export const deleteFolder = async (path: string, recursive: boolean = false) =>
 
 export const deleteFolderFiles = async (path: string) =>
 	Promise.allSettled((await readdir(path)).map((fileName) => deleteFile(path + sep + fileName)));
+
+export const gzipFile = (filePath: string) =>
+	createReadStream(filePath)
+		.pipe(createGzip())
+		.pipe(createWriteStream(filePath + ".gz"));
