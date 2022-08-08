@@ -1,5 +1,6 @@
 import { existsSync } from "fs";
 import { access, mkdir, readdir, rm, unlink, writeFile } from "fs/promises";
+import { sep } from "path";
 
 export const downloadFile = async (url: string, folderPath: string) => {
 	const fileName = url.split(sep).pop() || "unknown.file";
