@@ -1,5 +1,5 @@
 import { existsSync } from "fs";
-import { access, mkdir, unlink } from "fs/promises";
+import { access, mkdir, rm, unlink } from "fs/promises";
 
 export const createFolder = async (path: string, recursive: boolean = false) => {
 	if (!existsSync(path)) await mkdir(path, { recursive });
@@ -22,3 +22,6 @@ export const deleteFile = async (filePath: string) => {
 		return false;
 	}
 };
+
+export const deleteFolder = async (path: string, recursive: boolean = false) =>
+	rm(path, { recursive });
