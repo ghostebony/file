@@ -1,3 +1,4 @@
+import archiver from "archiver";
 import { createReadStream, createWriteStream, existsSync } from "fs";
 import { access, mkdir, readdir, rm, unlink, writeFile } from "fs/promises";
 import { sep } from "path";
@@ -53,6 +54,16 @@ export const deleteFolder = async (path: string, recursive: boolean = false) =>
 
 export const deleteFolderFiles = async (path: string) =>
 	Promise.allSettled((await readdir(path)).map((fileName) => deleteFile(path + sep + fileName)));
+
+export const gzipFolder = async (filePath: string, folderPath: string) => {
+	const archive = archiver("tar", { gzip: true });
+
+	archive.pipe(createWriteStream(filePath));
+
+	archive.directory(folderPath, false);
+
+	await archive.finalize();
+};
 
 export const gzipFile = (filePath: string) =>
 	createReadStream(filePath)
