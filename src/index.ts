@@ -17,7 +17,7 @@ const file_create = async (path: string, fileName: string, data: string | Stream
 
 export const file = {
 	async download(url: string, folderPath: string) {
-		const fileName = url.split(sep).pop() || "unknown.file";
+		const fileName = url.split("/").pop() || "unknown.file";
 
 		const filePath = await file_create(
 			folderPath,
