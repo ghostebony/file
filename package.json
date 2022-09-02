@@ -1,6 +1,6 @@
 {
 	"name": "@ghostebony/file",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"main": "index.js",
 	"type": "module",
 	"author": "Pedro Américo",
