@@ -1,12 +1,12 @@
 import archiver from "archiver";
 import { createReadStream, createWriteStream, existsSync } from "fs";
 import { access, mkdir, readdir, rm, rmdir, unlink, writeFile } from "fs/promises";
-import { sep } from "path";
+import { join } from "path";
 import type { Stream } from "stream";
 import { createGunzip, createGzip } from "zlib";
 
 const file_create = async (path: string, fileName: string, data: string | Stream) => {
-	const filePath = path + sep + fileName;
+	const filePath = join(path, fileName);
 
 	await folder.create(path);
 
@@ -65,7 +65,7 @@ export const folder = {
 	},
 	async deleteFiles(path: string) {
 		return Promise.allSettled(
-			(await readdir(path)).map((fileName) => file.delete(path + sep + fileName))
+			(await readdir(path)).map((fileName) => file.delete(join(path, fileName)))
 		);
 	},
 	async deleteWithFiles(path: string, recursive: boolean = false) {
