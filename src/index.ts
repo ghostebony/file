@@ -1,9 +1,9 @@
 import archiver from "archiver";
-import { createReadStream, createWriteStream, existsSync } from "fs";
-import { access, mkdir, readdir, rm, rmdir, unlink, writeFile } from "fs/promises";
-import { join } from "path";
-import type { Stream } from "stream";
-import { createGunzip, createGzip } from "zlib";
+import { createReadStream, createWriteStream, existsSync } from "node:fs";
+import { access, mkdir, readdir, rm, rmdir, unlink, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import type { Stream } from "node:stream";
+import { createGunzip, createGzip } from "node:zlib";
 
 const file_create = async (path: string, fileName: string, data: string | Stream) => {
 	const filePath = join(path, fileName);
